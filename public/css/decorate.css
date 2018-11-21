@@ -1,0 +1,222 @@
+
+#logo {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    display: block;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+h2#u-caption {
+    margin-top: 0px;
+    padding-top: 0px;
+    display: block;
+    font-size: medium;
+    font-weight: bolder;
+    color: white;
+    opacity: 0.9;
+}
+#J-caption {
+    margin-top: 0px;
+    padding-top: 0px;
+    display: block;
+    font-size: small;
+    font-weight: bolder;
+    opacity: 0.8;
+    position: absolute;
+    right:2%;
+    top: 70%;
+    z-index: 4000;
+}
+
+#caption {
+    margin-top: 10px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    display: block;
+    font-size: medium;
+    font-weight: bold;
+}
+
+h2#s-caption {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    color: #636b6f;
+    text-align: center;
+}
+
+.brand-logo {
+    position: relative;
+    left: 4%;
+
+}
+
+.nav-content{
+    margin-top: 7%;
+    display: block;
+    font-size: 25px;
+    font-weight: normal;
+    position: relative;
+    left: 4%;
+}
+
+
+/*Background and text color when a tab is active*/
+
+
+.nav-content {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.help {
+    background-color: #00a9ff;
+    -webkit-border-radius: 90%;
+    -moz-border-radius: 90%;
+    border-radius: 90%;
+}
+
+.profile {
+    -webkit-border-radius: 90%;
+    -moz-border-radius: 90%;
+    border-radius: 90%;
+    border-color: white;
+    border-style: solid;
+    border-width: 5px;
+}
+
+
+
+a.active:hover,
+a.active:focus{
+    background-color: inherit;
+}
+
+.tab-nav {
+
+    list-style: none;
+    padding: 0;
+    white-space: nowrap;
+    margin: 0;
+    overflow: auto;
+    box-shadow: inset 0 -2px 0 0 #eeeeee;
+    width: 100%;
+}
+
+.tab {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+marquee{
+    text-decoration: double;
+    font-size: x-large;
+}
+
+.card{
+    width: 87%;
+    position: relative;
+    top: -30px;
+    left: 6%;
+    border-radius: 2px;
+    padding-bottom: 3%;
+    padding-top: 2%;
+}
+#card_alert{
+    text-transform: capitalize;
+}
+
+.container{
+    width: 80%;
+}
+#student_info{
+    text-transform: capitalize;
+    color: gray;
+    font-family: SansSerif;
+}
+
+#teacher_info{
+    text-transform: capitalize;
+    color: gray;
+    font-family: SansSerif;
+}
+#department_info{
+    text-transform: capitalize;
+    color: gray;
+    font-family: SansSerif;
+}
+#faculty_info{
+    text-transform: capitalize;
+    color: gray;
+    font-family: SansSerif;
+}
+
+
+#welcome_message{
+    position: absolute;
+    bottom: 2%;
+    right:0%;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 4000;
+}
+#print_table{
+    width: 90%;
+}
+ul.dropdown-content.select-dropdown li span {
+    color: gray; /* no need for !important :) */
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: whitesmoke;
+}
+
+main {
+    flex: 1 0 auto;
+}
+#login{
+    width: 25%;
+    position: relative;
+    top: -10%;
+
+}
+select option:hover {
+    background-color:cornflowerblue;
+}
+.fullwidth {
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
+    display:block;
+    text-align:center; /*This will result in centering the link text, which is probably what you want -brianjohnsondesign.com*/
+}
+@media only screen and (max-width : 1010px) {
+        #login{
+        width: 280px;
+        position: relative;
+        top: -10%;
+    }
+
+    .materialize-textarea{
+        border-top: 20px solid blue;
+    }
+
+
+
+}
+
+
+
+
+
+

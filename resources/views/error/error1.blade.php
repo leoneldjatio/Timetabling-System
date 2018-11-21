@@ -1,0 +1,1 @@
+<div class="alert alert-danger text-center" role="alert" style="border-radius: 30px"><i class="zmdi zmdi-alarm"></i>@lang('messages.semester_noexist')</div>
