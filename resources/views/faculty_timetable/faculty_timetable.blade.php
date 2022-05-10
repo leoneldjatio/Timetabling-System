@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="container">
+        <div class="container" style="width: inherit">
             <form role="form" enctype="multipart/form-data" method="post" action="/faculty" id="faculty_generation">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="row">
@@ -74,12 +74,12 @@
                 </div>
                 <br>
                 <div class="table-responsive">
-                <table class="table table-striped" id="print">
+                <table class="table table-bordered" id="print">
                     <thead>
                     <tr>
-                        <th class="@lang('messages.table_theme')"><b>@lang('messages.table_side_caption')</b></th>
+                        <th class="@lang('messages.table_theme2')"><b><a style="color: black">@lang('messages.table_side_caption')</a></b></th>
                         @foreach($semester->weekDays()->get()->first()->timeSlots()->get() as $timeslot)
-                            <th class="@lang('messages.table_theme')"><b>{{ $timeslot->time_slot_name }}</b></th>
+                            <th class="@lang('messages.table_theme')"><b><a style="color: white">{{ $timeslot->time_slot_name }}</a></b></th>
                         @endforeach
                     </tr>
                     </thead>
@@ -88,7 +88,7 @@
 
                     @foreach($semester->weekDays()->get() as $week_day)
                         <tr>
-                            <td class="@lang('messages.table_theme')"><b>{{ $week_day->week_day_name }}</b></td>
+                            <td class="@lang('messages.table_theme')"><b><a style="color: white">{{ $week_day->week_day_name }}</a></b></td>
                             @foreach($week_day->timeSlots()->get() as $time_slot)
                                 <td>
 
@@ -96,8 +96,8 @@
 
                                         @foreach($faculty_courses as $course)
                                             @if($allocation->course_code == $course->course_code)
-                                                {{  $allocation->course_code . ' ' .  $allocation->room_name  }}
-                                                <br>{{ $allocation->teacher_name }}<br>
+                                                <a style="color: brown">{{  $allocation->course_code . ' ' .  $allocation->room_name  }}</a>
+                                                <br><a style="color: black">{{ $allocation->teacher_name }}</a><br><br>
                                             @endif
                                         @endforeach
 

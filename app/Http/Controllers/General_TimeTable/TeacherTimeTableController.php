@@ -4,7 +4,7 @@ namespace App\Http\Controllers\General_TimeTable;
 /**
  * @author Go-Groups LTD
  * Created by PhpStorm.
- * User: ewangclarks
+ * User: Leonel Otun Djatio Foma
  * Date: 13/01/17
  * Time: 3:17 PM
  *

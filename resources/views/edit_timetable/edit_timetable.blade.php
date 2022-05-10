@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="container">
+        <div class="container" style="width: inherit">
             <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="/edittimetable" id="edit_generation">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="card-body card-padding">
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <!--<script>
         $('#edit_generation').submit(function (e) {
             $.ajaxSetup({
                 global: true,
@@ -129,7 +129,7 @@
 
 
 
-    </script>
+    </script> -->
 
 @endsection
 

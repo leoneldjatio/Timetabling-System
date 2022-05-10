@@ -33,12 +33,12 @@
     <h5 style="text-transform: capitalize;color: grey;">@lang('messages.t_caption')</h5>
 </div> <br>
 <div class="table-responsive">
-<table class="table table-striped">
+<table class="table table-bordered">
     <thead>
     <tr>
-        <th class="@lang('messages.table_theme')"><b>@lang('messages.table_side_caption')</b></th>
+        <th class="@lang('messages.table_theme2')"><b><a style="color: black">@lang('messages.table_side_caption')</a></b></th>
         @foreach($semester->weekDays()->get()->first()->timeSlots()->get() as $timeslot)
-            <th class="@lang('messages.table_theme')"><b>{{ $timeslot->time_slot_name }}</b></th>
+            <th class="@lang('messages.table_theme')"><b><a style="color: white">{{ $timeslot->time_slot_name }}</a></b></th>
         @endforeach
     </tr>
     </thead>
@@ -47,11 +47,12 @@
 
     @foreach($semester->weekDays()->get() as $week_day)
         <tr>
-            <td class=""><b>{{ $week_day->week_day_name }}</b></td>
+            <td class="@lang('messages.table_theme')"><b><a style="color: white">{{ $week_day->week_day_name }}</a></b></td>
             @foreach($week_day->timeSlots()->get() as $time_slot)
                 <td>
                 @foreach($time_slot->allocations()->get() as $allocation)
-                        {{ $allocation->course_code . ' ' . $allocation->room_name }} {{ $allocation->teacher_name}} <br>
+                        <a style="color: brown">{{ $allocation->course_code . ' ' . $allocation->room_name }}</a>
+                        <br><a style="color: black">{{$allocation->teacher_name}}</a><br><br>
                     @endforeach
                 </td>
             @endforeach

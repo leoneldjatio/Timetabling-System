@@ -33,45 +33,46 @@
 <div class="row">
     <div class="col-sm5">
         <div class= "table-responsive">
-        <table class="table table-striped">
+        <table class="table table-bordered" border="1">
             <thead>
             <tr>
-                <th class="@lang('messages.table_theme')"><b>@lang('messages.config')</b></th>
-                <th class="@lang('messages.table_theme')"><b>@lang('messages.config_value')</b></th>
+                <th class="@lang('messages.table_theme')"><b><a style="color: white">@lang('messages.config')</a></b></th>
+                <th class="@lang('messages.table_theme')"><b><a style="color: white">@lang('messages.config_value')</a></b></th>
             </tr>
             </thead>
 
             <tbody>
             <tr>
-                <td class="@lang('messages.table_theme')"><b>@lang('messages.dperiods')</b></td>
-                <td @lang('messages.table_theme')>{{ $config->max_day_period }}</td>
+                <td class=""><b>@lang('messages.dperiods')</b></td>
+                <td>{{ $config->max_day_period }}</td>
             </tr>
             <tr>
-                <td class="@lang('messages.table_theme')"><b>@lang('messages.lperiods')</b></td>
-                <td @lang('messages.table_theme')>{{ $config->lecturer_max_day_period }}</td>
+                <td class=""><b>@lang('messages.lperiods')</b></td>
+                <td>{{ $config->lecturer_max_day_period }}</td>
             </tr>
             <tr>
-                <td class="@lang('messages.table_theme')"><b>@lang('messages.pduration')</b></td>
-                <td @lang('messages.table_theme')>{{ $config->period_duration }}</td>
+                <td class=""><b>@lang('messages.pduration')</b></td>
+                <td>{{ $config->period_duration }}</td>
             </tr>
             <tr>
-                <td class="@lang('messages.table_theme')"><b>@lang('messages.start_time')</b></td>
-                <td @lang('messages.table_theme')>{{ $config->start_time }}</td>
+                <td class=""><b>@lang('messages.start_time')</b></td>
+                <td>{{ $config->start_time }}</td>
             </tr>
 
             <tr>
-                <td class="@lang('messages.table_theme')"><b>@lang('messages.select_split')</b></td>
+                <td class=""><b>@lang('messages.select_split')</b></td>
                 <td @lang('messages.table_theme')>{{ $config->should_split }}</td>
             </tr>
 
             </tbody>
         </table>
         </div>
+        <br><br>
     <div class="col-sm4">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th class="@lang('messages.table_theme')"><b>@lang('messages.day_slot')</b></th>
+                <th class="@lang('messages.table_theme')"><b><a style="color: white">@lang('messages.day_slot')</a></b></th>
             </tr>
             </thead>
             <tbody>

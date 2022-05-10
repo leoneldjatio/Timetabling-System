@@ -2,11 +2,12 @@
         <select id="{{ 'select-' . $timeSlot->time_slot_id }}"  class="{{$timeSlot->time_slot_id}}" name="{{$teacher->teacher_id}}">
             <option value="none" selected disabled="disabled" >SELECT COURSE</option>
             @foreach($lectCourses as $course)
-                <option value="{{ $course->course_code}}" >{{$course->course_code}}</option>
+                <option class="palette-White bg" style="color: black" value="{{ $course->course_code}}" >{{$course->course_code}}</option>
             @endforeach
-            <option value="delete">@lang('messages.delete')</option>
+            @if($oldCourse != null)
+            <option class="palette-Red bg" style="color:white" value="delete">@lang('messages.delete')</option>
+                @endif
         </select>
-
         <script>
             var selectId = '#select-' + JSON.parse(@json($timeSlot->time_slot_id));
             $(selectId).change(function (e) {
@@ -55,10 +56,17 @@
                             },
                         })
                     },
-                }).then((result) => {
+
+                }
+                ).then((result) => {
                     if (result.dismiss == "cancel") {
                         tdId = '.' + tdInfo.timeSlotID;
                         $(tdId).text(data.oldcourse);
+
+                        location.reload();
+                    }
+                    else{
+                            location.reload();
                     }
                 });
 

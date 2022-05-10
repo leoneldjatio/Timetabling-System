@@ -5,7 +5,7 @@ namespace App\Http\Controllers\General_TimeTable;
 /**
  * @author Go-Groups LTD
  * Created by PhpStorm.
- * User: ewangclarks
+ * User: Leonel Otun Djatio Foma
  * Date: 13/01/17
  * Time: 3:17 PM
  *
@@ -114,7 +114,7 @@ class FacultyTimeTableController extends Controller
 
 
         }
-        $pdf = PDF::loadView('faculty_timetable.download_table', compact('year', 'semester', 'department', 'faculty_courses'));
+        $pdf = PDF::loadView('faculty_timetable.download_table', compact('year', 'semester','faculty', 'department', 'faculty_courses'));
         $numTimeSlots = $semester->weekDays()->first()->timeSlots()->get()->count();
         if($numTimeSlots >5){
             $pdf->setPaper('A4', 'landscape');

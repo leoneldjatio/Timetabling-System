@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="container">
+        <div class="container" style="width: inherit">
             <form  role="form" enctype="multipart/form-data" class="col s12" method="POST" action="/configuration" id="Configure">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="card-body card-padding">

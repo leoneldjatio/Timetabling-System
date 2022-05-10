@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="card">
-        <div class="container" id="general">
+        <div class="container" id="general" style="width: inherit">
                 <div role="tabpanel">
                     <ul class="tab-nav" role="tablist">
                         <li class="active" id="gen">
                             <a href="#generate"  aria-controls="generate" role="tab" data-toggle="tab">
                                 <i  class="zmdi zmdi-balance"></i> @lang('messages.gen_timetable')</a>
                         </li>
-                        <li style="margin-left: 350px" id="gen">
+                        <li style="margin-left: 300px" id="gen">
                             <a href="#maintain" aria-controls="maintain" role="tab" data-toggle="tab">
                                 <i  class="zmdi zmdi-balance"></i> @lang('messages.main_timetable')</a>
                         </li>

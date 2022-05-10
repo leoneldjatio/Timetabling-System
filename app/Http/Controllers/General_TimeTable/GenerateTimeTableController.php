@@ -6,7 +6,7 @@ namespace App\Http\Controllers\General_TimeTable;
 /**
  * @author Go-Groups LTD
  * Created by PhpStorm.
- * User: ewangclarks
+ * User: Leonel Otun Djatio Foma
  * Date: 13/01/17
  * Time: 3:17 PM
  *
@@ -32,10 +32,10 @@ use Mockery\CountValidator\Exception;
 use PDF;
 
 /**
- * ODD and Even constant definitions
+ * odd and eve constant definitions
  */
-define('ODD', 5, true);
-define('EVEN', 2, true);
+define('odd', '5');
+define('eve', '2');
 
 class GenerateTimeTableController extends Controller
 {
@@ -262,18 +262,18 @@ class GenerateTimeTableController extends Controller
                                 }
                             }
                             //enables creation of allocations in the form of chess board
-                            if ($this->isEven($facultySentinel)) {
-                                $facultySentinel = ODD;
+                            if ($this->iseve($facultySentinel)) {
+                                $facultySentinel = odd;
                             } else {
-                                $facultySentinel = EVEN;
+                                $facultySentinel = eve;
                             }
                         }
                         //enables creation of allocations in the form of chess board
                         $this->optimize();
-                        if ($this->isEven($timeslotSentinel)) {
-                            $timeslotSentinel = ODD;
+                        if ($this->iseve($timeslotSentinel)) {
+                            $timeslotSentinel = odd;
                         } else {
-                            $timeslotSentinel = EVEN;
+                            $timeslotSentinel = even;
                         }
                     }
 
@@ -284,10 +284,10 @@ class GenerateTimeTableController extends Controller
                      ************************************************************************************************/
                     $this->resetTeacherStatus();
                     //enables creation of allocations in the form of chess board
-                    if ($this->isEven($weekDaySentinel)) {
-                        $weekDaySentinel = ODD;
+                    if ($this->iseve($weekDaySentinel)) {
+                        $weekDaySentinel = odd;
                     } else {
-                        $weekDaySentinel = EVEN;
+                        $weekDaySentinel = eve;
                     }
 
                 }
@@ -301,10 +301,10 @@ class GenerateTimeTableController extends Controller
                 if ($allCourses->count() == 0 || $fitness == 3) {
                     break;
                 }
-                if ($this->isEven($loopSentinel)) {
-                    $loopSentinel = ODD;
+                if ($this->iseve($loopSentinel)) {
+                    $loopSentinel = odd;
                 } else {
-                    $loopSentinel = EVEN;
+                    $loopSentinel = eve;
                 }
               if($fitness == 3){
 
@@ -355,12 +355,12 @@ class GenerateTimeTableController extends Controller
             return $course;
         });
         //if ($fitness == 0) {
-            //prevents students to have straight forward courses
-            if ($this->isEven($timeslotSentinel)) {
+            //prevets students to have straight forward courses
+            if ($this->iseve($timeslotSentinel)) {
                 $facultyCourses = $facultyCourses->reject(function ($course) use ($timeslotSentinel) {
                     $courseLevel = Level::find($course->levels_level_id);
                     $levelFirstDigit = $this->stripFirstDigit((int)$courseLevel->level_name);
-                    if (!$this->isEven($levelFirstDigit)) {
+                    if (!$this->iseve($levelFirstDigit)) {
                         return true;
                     } else {
                         return false;
@@ -372,7 +372,7 @@ class GenerateTimeTableController extends Controller
                 $facultyCourses = $facultyCourses->reject(function ($course) use ($timeslotSentinel) {
                     $courseLevel = Level::find($course->levels_level_id);
                     $levelFirstDigit = $this->stripFirstDigit((int)$courseLevel->level_name);
-                    if ($this->isEven($levelFirstDigit)) {
+                    if ($this->iseve($levelFirstDigit)) {
                         return true;
                     } else {
                         return false;
@@ -394,7 +394,7 @@ class GenerateTimeTableController extends Controller
      * @param $period
      * @return bool
      */
-    public function isEven($period)
+    public function iseve($period)
     {
         if ($period % 2 == 0) {
             return true;
@@ -620,7 +620,7 @@ class GenerateTimeTableController extends Controller
 
         foreach ($population as $individualAlloc) {
 
-            //prevent courses of same name and department from appearing in thesame time slot
+            //prevet courses of same name and department from appearing in thesame time slot
             if ((strcmp($individualAlloc->course_code, $course->course_code) == 0) || (strcmp($individualAlloc->room_name, $classroom->room_name) == 0) || (($individualAlloc->departments_department_id == $course->departments_department_id) && ($individualAlloc->levels_level_id == $course->levels_level_id))) {
                 return false;
             }

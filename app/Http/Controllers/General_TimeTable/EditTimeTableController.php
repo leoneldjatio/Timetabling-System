@@ -5,7 +5,7 @@ namespace App\Http\Controllers\General_Timetable;
 /**
  * @author Go-Groups LTD
  * Created by PhpStorm.
- * User: ewangclarks
+ * User: Leonel Otun Djatio Foma
  * Date: 13/01/17
  * Time: 3:17 PM
  *
@@ -17,6 +17,7 @@ use App\Department;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Edit_TimeTable\EditTimeTableRequest;
 use App\Room;
+use App\Semester;
 use App\Student;
 use App\Teacher;
 use App\TimeSlot;
@@ -72,7 +73,7 @@ class EditTimeTableController extends Controller
         $depCourses = $department->courses()->get();
         $courses = $teacher->courses()->get();
 
-        return view('edit_timetable.edit_table', compact('year', 'semester', '$teacher_name', 'teacher', 'department', 'allYears', 'courses', 'depCourses'));
+        return view('edit_timetable.edit_table', compact('year', 'semester', 'teacher', 'department', 'allYears', 'courses', 'depCourses'));
 
     }
 
@@ -98,7 +99,7 @@ class EditTimeTableController extends Controller
 
             $classroom = $this->constraintcheckerAndResolver($department, $oldCourse, $timeSlot);
                 if ($classroom == null || empty($classroom)) {
-                    return response()->json(["status" => "RETRY AGAIN! COULD NOT FIND A ROOM"], 202);
+                    return "RETRY AGAIN! COULD NOT FIND A ROOM";
                 }
                 if ($this->clashSolve($oldCourse, $timeSlotPopulation, $teacher)) {
                     DB::table('allocations')->insert([
@@ -111,7 +112,8 @@ class EditTimeTableController extends Controller
                         'course_spec' => $oldCourse->course_spec
                     ]);
                 } else {
-                    return response()->json(["status" => "CLASH"], 202);
+                    $message = '<span style="color:red;"><b>CLASH</b><span>';
+                    return $message;
                 }
 
         } elseif (($tdInfo['newCourseCode'] != "delete") && ($tdInfo['oldCourseCode'] != null)) {// a change has occured insertt course into database
@@ -122,7 +124,7 @@ class EditTimeTableController extends Controller
 
             $classroom = $this->constraintcheckerAndResolver($department, $oldCourse, $timeSlot);
                 if ($classroom == null || empty($classroom)) {
-                    return response()->json(["status" => "RETRY AGAIN! COULD NOT FIND A ROOM"], 202);
+                    return 'RETRY AGAIN! COULD NOT FIND A ROOM';
                 }
                 if ($this->clashSolve($oldCourse, $timeSlotPopulation, $teacher)) {
                     DB::table('allocations')->insert([
@@ -136,12 +138,14 @@ class EditTimeTableController extends Controller
                     ]);
 
                 } else {
-                    return response()->json(["status" => 'CLASH'], 202);
+                    $message = '<span style="color: red;"><b>CLASH</b></span>';
+                    return $message;
                 }
             }
 
         else {
-            return response()->json(["status" => 'SELECT a COURSE to EDIT'], 202);
+            $message = '<span style="color:orange;"><b>SELECT A COURSE TO EDIT</b></span>';
+            return $message;
         }
         return $tdInfo['newCourseCode'];
     }
@@ -260,25 +264,39 @@ class EditTimeTableController extends Controller
     public function loadValidCourses(EditTimeTableRequest $request)
     {
         $tdInfo = $request->all();
+        $semester = Semester::where('semester_name', $tdInfo['Semester'])->first();
+        if($semester->semester_name == 'First Semester'){
+            $semester_no = 1;
+        }else{
+            $semester_no=2;
+        }
         $student = Student::where('student_name', Auth::user()->user_name)->get()->first();
         $department = $student->departments()->get()->first();
         $timeSlot = TimeSlot::where('time_slot_id', $tdInfo['timeSlotID'])->first();
         $timeSlotPopulation = $timeSlot->allocations()->where('departments_department_id', $department->department_id)->get();
         $teacher = Teacher::where('teacher_name', $tdInfo['teacherName'])->first();
-        $lectCourses = $teacher->courses()->where('departments_department_id', $department->department_id)->get();
-        $lectCourses = $lectCourses->reject(function ($lectcourse) use ($timeSlotPopulation) {
-            foreach ($timeSlotPopulation as $allocation) {
-                if ($allocation->levels_level_id == $lectcourse->levels_level_id) {
-                    return true;
+        if($tdInfo['oldCourseCode'] == null) {
+            $lectCourses = $teacher->courses()->where('departments_department_id', $department->department_id)->where('semester_no', $semester_no)->get();
+            $numberOfCourses = $teacher->courses()->where('departments_department_id', $department->department_id)->where('semester_no', $semester_no)->count();
+            $lectCourses = $lectCourses->reject(function ($lectcourse) use ($timeSlotPopulation) {
+                foreach ($timeSlotPopulation as $allocation) {
+                    if ($allocation->levels_level_id == $lectcourse->levels_level_id) {
+                        return true;
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            $lectCourses = Collect([]);
+        }
         $oldCourse = $tdInfo['oldCourseCode'];
         $teacherName = $tdInfo['teacherName'];
-        if (($oldCourse == null && $lectCourses->isEmpty())) {
-            return response()->json(['state' => 'POSSIBLE CLASH'], 202);
-        } else {
-            return view('edit_timetable.editable_options', compact('lectCourses', 'timeSlot', 'teacherName', 'teacher', 'oldCourse'));
+        if(($oldCourse == null && $lectCourses->isEmpty())) {
+            $message = '<span style="color: red;"><b>POSSIBLE CLASH</b></span>';
+            return $message;
+        }
+
+        else {
+            return view('edit_timetable.editable_options', compact('lectCourses', 'timeSlot', 'teacherName', 'teacher', 'oldCourse','numberOfCourses'));
         }
     }
 
@@ -307,8 +325,3 @@ class EditTimeTableController extends Controller
         return $pdf->download('editedtimetable.pdf');
     }
 }
-
-
-
-
-
