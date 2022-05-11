@@ -6,6 +6,7 @@
 
     RewriteEngine On
 
+      #Added to resolve Horuku forbidden erro"
     RewriteCond%{REQUEST_URI}!^public
     RewriteRule^(.*)$public/$1[L]
 
